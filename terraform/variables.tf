@@ -64,7 +64,7 @@ variable "eks_clusr_conf" {
 variable "key_name" {
   description = "Name of EC2 Key Pair"
   type        = string
-  default     = "junjie-useast1-31102024" # Change accordingly
+  default     = "ce7-junjie-useast1-05112024" # Change accordingly
 }
 
 # These are variables used in the iam.tf file.

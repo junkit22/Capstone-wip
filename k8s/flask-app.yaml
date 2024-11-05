@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: junjie-test-flask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: junjie-test-flask
+  template:
+    metadata:
+      labels:
+        app: junjie-test-flask
+    spec:
+      containers:
+      - name: junjie-test-flask
+        image: 255945442255.dkr.ecr.us-east-1.amazonaws.com/junjie-flask-app:latest
+
+        ports:
+        - containerPort: 31327
+      imagePullSecrets:
+      - name: ecr-public-secret

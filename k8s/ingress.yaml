@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: junjie-ingress
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: 255945442255.dkr.ecr.us-east-1.amazonaws.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: junjie-test-flask
+            port:
+              number: 80
