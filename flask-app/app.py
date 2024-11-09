@@ -1,26 +1,16 @@
-from flask import Flask, jsonify
+from prometheus_client import start_http_server, Counter
 import time
-import threading
 
-app = Flask(__name__)
-ping_count = 0
+# Create a counter metric
+ping_counter = Counter('ping_messages', 'Number of ping messages sent')
 
-def ping_loop():
-    global ping_count
+def send_ping():
     while True:
-        ping_count += 1
-        print(f"Ping {ping_count}")
+        ping_counter.inc()  # Increment the counter
+        print("Ping message")
         time.sleep(5)
 
-@app.route('/metrics')
-def metrics():
-    return jsonify({"ping_count": ping_count})
-
-# Start the ping loop in a separate thread
-thread = threading.Thread(target=ping_loop)
-thread.daemon = True
-thread.start()
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=31327)
-
+if __name__ == "__main__":
+    # Start the HTTP server on port 31327 for Prometheus metrics
+    start_http_server(31327)
+    send_ping()
