@@ -135,7 +135,3 @@ data:
         - source_labels: [__meta_kubernetes_service_name]
           action: replace
           target_label: kubernetes_name
-          - job_name: "junjie-flask-app"
-        metrics_path: "/metrics"
-        static_configs:
-          - targets: ["junjie-flask-metrics:31327"]
